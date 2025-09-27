@@ -1,0 +1,8 @@
+Hi guys, si lo quieren instalar en su lap ocupan
+fastapi
+uvicorn
+psycopg2-binary
+sqlalchemy
+
+y lo instalan con 
+pip install -r requirements.txt

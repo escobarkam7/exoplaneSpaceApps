@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 Exoplanet Database Dashboard</h1>
+            <p>Visualización de datos de Kepler, K2 y TESS</p>
+        </header>
+
+        <div class="controls">
+            <select id="datasetSelect">
+                <option value="">Selecciona un dataset...</option>
+                <option value="kepler">Kepler Mission</option>
+                <option value="k2planets">K2 Mission</option>
+                <option value="tess">TESS Mission</option>
+            </select>
+            
+            <input type="number" id="limitInput" placeholder="Límite" value="50" min="1" max="1000">
+            <button onclick="loadPlanets()">Cargar Exoplanetas</button>
+            <span id="stats" class="stats"></span>
+        </div>
+
+        <div id="loading" class="hidden">Cargando datos... ⏳</div>
+        <div id="error" class="hidden error"></div>
+        
+        <div id="planetsContainer" class="planets-container"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
