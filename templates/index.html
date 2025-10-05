@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exoplanet Dashboard</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <!-- AGREGA FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- USA STYLE.CSS EN LUGAR DE HOME.CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
 </head>
 <body>
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
     <div class="container">
         <header>
-            <h1>🌌 Exoplanet Database Dashboard</h1>
-            <p>Visualización de datos de Kepler, K2 y TESS</p>
+            <h1>Training Database</h1>
+            <p>Datos de Kepler, K2 y TESS que se han usado para entrenar la red neuronal de NOVOKAAB. Los nuevos datos que se agreguen para seguir entrenándola aparecerán aquí.</p>
         </header>
 
         <div class="controls">
@@ -32,6 +43,28 @@
         <div id="planetsContainer" class="planets-container"></div>
     </div>
 
-    <script src="/static/app.js"></script>
+    <!-- Menú lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Menú</span>
+            <button class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/"> LOG IN OR SIGN UP </a></li>
+            <li><a href="/"> WHO ARE WE </a></li>
+            <li><a href="/"> CLASSIFY </a></li>
+            <li><a href="/database"> DATABASE </a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay PARA CERRAR MENÚ -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- SOLO CARGA home.js - EL MENÚ LATERAL -->
+    <script src="{{ url_for('static', path='/js/home.js') }}"></script>
+    <!-- CORRIGE LA RUTA DE app.js -->
+    <script src="{{ url_for('static', path='/js/app.js') }}"></script>
 </body>
 </html>

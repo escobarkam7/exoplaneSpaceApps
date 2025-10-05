@@ -1,0 +1,341 @@
+/* Estilo general */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra superior */
+.top-bar {
+    background-color: #1a191d;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Icono de menú */
+.menu-icon i {
+    color: #fdf7e8; /* beige claro */
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Logo centrado */
+.hero {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-text {
+    font-size: 100px;
+    font-weight: 900;
+    color: #fdf7e8;
+    letter-spacing: 5px;
+    line-height: 0.9;
+}
+
+/* Menú lateral (cerrado por defecto) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #fdf7e8;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    transition: left 0.4s ease;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px; /* Más espacio arriba */
+}
+
+/* Estado abierto */
+.sidebar.active {
+    left: 0;
+}
+
+/* Encabezado del menú */
+.sidebar-header {
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    color: #000;
+    margin-bottom: 50px; /* Más espacio debajo del título */
+}
+
+/* Lista del menú - CENTRADO */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espacio uniforme entre botones */
+}
+
+.sidebar-menu li {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-menu a {
+    display: block;
+    width: 100%;
+    max-width: 200px; /* Ancho máximo para mejor centrado */
+    text-align: center;
+    background-color: #1d3d6e;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Asegurar que esté centrado */
+    margin: 0 auto;
+}
+
+.sidebar-menu a:hover {
+    background-color: #274b84;
+    transform: scale(1.03);
+}
+
+/* Botón de cerrar menú */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Overlay PARA CERRAR MENÚ - CORREGIDO */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cambiado de transparente a oscuro */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.overlay.active {
+    opacity: 1; /* Cambiado de 0 a 1 */
+    visibility: visible;
+}
+
+/* Contenido principal */
+.hero {
+    padding: 80px 20px;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50%;
+    height: auto;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .logo-img {
+        width: 40%;
+    }
+    
+    .content-section-d h2 {
+        font-size: 2rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        width: 280px;
+    }
+}
+
+/* Secciones de contenido adicional */
+.content-section-d {
+    padding: 2% 60% 3% 3%;
+    color: #000000;
+    background-color: #fdf7e8;
+}
+
+.content-section-l {
+    padding: 5% 5% 3% 3%;
+    color: #fdf7e8;
+}
+
+.content-section-l-t {
+    padding: 5% 60% 6% 6%;
+    color: #fdf7e8;
+}
+
+.content-section-l-t p {
+    padding: 30%, 30%, 20%, 20%;
+}
+
+.content-section.dark {
+    background-color: #0a0a0a;
+}
+
+.content-section:not(.dark) {
+    background-color: #111;
+}
+
+.container-d {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #000000;
+    background-color: #fdf7e8;
+}
+.container-l {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fdf7e8;
+    background-color: #000000;
+}
+
+.container-l-t {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fdf7e8;
+    background-color: #000000;
+}
+
+.content-section-d h2{
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #000000;
+    background-color: #fdf7e8;
+}
+.content-section-l h2{
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fdf7e8;
+    background-color: #000000;
+}
+
+.content-section-l-t h2{
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fdf7e8;
+    background-color: #000000;
+}
+
+.content-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    color: #ccc;
+}
+
+.botones {
+    display: block;
+    width: 100%;
+    max-width: 200px; /* Ancho máximo para mejor centrado */
+    text-align: center;
+    background-color: #1d3d6e;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Asegurar que esté centrado */
+    margin: 0 auto;
+}
+
+/* Grid de características */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item i {
+    font-size: 3rem;
+    color: #4fc3f7;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fdf7e8;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+/* Botón CTA */
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #1d3d6e, #274b84);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(29, 61, 110, 0.4);
+}

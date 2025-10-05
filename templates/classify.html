@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificar Exoplanetas - SpaceApps</title>
+    <link rel="stylesheet" href="/static/css/classify.css">
+    <!-- AÑADIR FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="menu-icon" id="menuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <main class="classify-container">
+        <div class="classify-header">
+            <h1>Clasificador de Exoplanetas</h1>
+            <p>Sube datos de telescopios espaciales y detecta exoplanetas automáticamente</p>
+        </div>
+
+        <!-- Documentación para Investigadores -->
+        <div class="docs-section">
+            <div class="docs-header">
+                <h2>Guía para Investigadores</h2>
+                <button class="docs-toggle" id="docsToggle">▼ Mostrar Documentación</button>
+            </div>
+            
+            <div class="docs-content" id="docsContent" style="display: none;">
+                <div class="docs-grid">
+                    <div class="doc-card">
+                        <h3>¿Cómo Funciona?</h3>
+                        <p>Este sistema utiliza <strong>aprendizaje automático</strong> (Regresión Logística) entrenado con datos de misiones Kepler, K2 y TESS de la NASA para clasificar candidatos a exoplanetas.</p>
+                        <ul>
+                            <li><strong>Entrada:</strong> Datos fotométricos y estelares crudos</li>
+                            <li><strong>Procesamiento:</strong> Preprocesamiento automático de características</li>
+                            <li><strong>Salida:</strong> Predicción binaria + probabilidades</li>
+                        </ul>
+                    </div>
+
+                    <div class="doc-card">
+                        <h3>Parámetros de Salida</h3>
+                        <div class="param-explanation">
+                            <div class="param-item">
+                                <span class="param-label">Predicción:</span>
+                                <span class="param-desc">Clasificación final (Exoplaneta/Falso Positivo)</span>
+                            </div>
+                            <div class="param-item">
+                                <span class="param-label">Confianza:</span>
+                                <span class="param-desc">Certera del modelo en su predicción (0-100%)</span>
+                            </div>
+                            <div class="param-item">
+                                <span class="param-label">Prob. Exoplaneta:</span>
+                                <span class="param-desc">Probabilidad de que sea un exoplaneta real</span>
+                            </div>
+                            <div class="param-item">
+                                <span class="param-label">Prob. Falso Positivo:</span>
+                                <span class="param-desc">Probabilidad de que sea ruido o error instrumental</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doc-card">
+                        <h3>Interpretación de Confianza</h3>
+                        <div class="confidence-scale">
+                            <div class="scale-item high-confidence">
+                                <span class="scale-label">Alta (>80%):</span>
+                                <span class="scale-desc">Resultado muy confiable</span>
+                            </div>
+                            <div class="scale-item medium-confidence">
+                                <span class="scale-label">Media (60-80%):</span>
+                                <span class="scale-desc">Verificación recomendada</span>
+                            </div>
+                            <div class="scale-item low-confidence">
+                                <span class="scale-label">Baja (<60%):</span>
+                                <span class="scale-desc">Análisis adicional necesario</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doc-card">
+                        <h3>Formatos Soportados</h3>
+                        <p>El sistema detecta automáticamente datos de:</p>
+                        <ul>
+                            <li><strong>Kepler:</strong> koi_disposition, koi_period, koi_prad, etc.</li>
+                            <li><strong>K2:</strong> disposition, pl_orbper, pl_rade, etc.</li>
+                            <li><strong>TESS:</strong> tfopwg_disp, pl_orbper, pl_rade, etc.</li>
+                        </ul>
+                        <p class="doc-tip">💡 <strong>Tip:</strong> Las columnas de identificación y disposición se ignoran automáticamente</p>
+                    </div>
+                </div>
+
+                <div class="tech-specs">
+                    <h3>Especificaciones Técnicas</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Algoritmo:</span>
+                            <span class="spec-value">Regresión Logística</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Preprocesamiento:</span>
+                            <span class="spec-value">Scikit-learn Pipeline</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Métricas:</span>
+                            <span class="spec-value">AUC-ROC, Precisión, Confianza</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Entrenamiento:</span>
+                            <span class="spec-value">Datos etiquetados NASA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon"></div>
+                <h3>Arrastra tu archivo CSV aquí o haz clic para seleccionar</h3>
+                <p>Formatos soportados: Kepler, K2, TESS</p>
+                <input type="file" id="fileInput" accept=".csv" style="display: none;">
+            </div>
+            
+            <button id="predictBtn" class="btn-classify" disabled>
+                Clasificar Exoplanetas
+            </button>
+            
+            <div class="loading-classify" id="loadingClassify" style="display: none;">
+                <div class="spinner-classify"></div>
+                <p>Analizando datos con inteligencia artificial...</p>
+            </div>
+
+            <div id="alertContainer"></div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <h2> Resultados del Análisis</h2>
+            
+            <div class="stats-grid" id="statsGrid">
+                <!-- Las estadísticas se llenarán con JavaScript -->
+            </div>
+
+            <div class="predictions-table">
+                <h3>🔍 Predicciones Detalladas</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Predicción</th>
+                                <th>Confianza</th>
+                                <th>Prob. Exoplaneta</th>
+                                <th>Prob. Falso Positivo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="predictionsBody">
+                            <!-- Las predicciones se llenarán con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Menú lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Menú</span>
+            <button class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/">LOG IN OR SIGN UP</a></li>
+            <li><a href="/">WHO ARE WE</a></li>
+            <li><a href="/classify">CLASSIFY</a></li>
+            <li><a href="/database">DATABASE</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay para cerrar menú -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="/static/js/classify.js"></script>
+</body>
+</html>

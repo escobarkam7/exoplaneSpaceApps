@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVOKAAB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/home.css') }}">
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+     <div class="main-content"></div>
+        <!--Logo-->
+        <section class="hero">
+            <!--<h1 class="logo-text">NOVO<br>KAAB</h1>-->
+            <img src="{{ url_for('static', path='/images/logo.jpeg') }}" alt="ExoplanetML Logo" class="logo-img">
+        </section>
+        <!-- NUEVO: Más secciones de contenido -->
+        <section class="content-section-d">
+            <div class="container-d">
+                <h2>EXO¿QUÉ?</h2>
+                <p>Los exoplanetas o planetas extrasolares son planetas fuera del sistema solar que orbitan una o incluso dos estrellas. Son de diferentes tamaños y composiciones. Los astrónomos los estudian para responder la siguiente interrogante: ¿Estamos solos en el universo?</p>
+                <h2>AI+EXOHUNTING</h2>
+                <p>En NOVOKAAB buscamos brindarle a la comunidad científica una herramienta para analizar y clasificar nuevos datos de los telescopios Kepler, K2 y TESS reduciendo así el tiempo de trabajo y el dinero invertido en este proceso.</p>
+            </div>
+        </section>
+
+        <section class="content-section-l">
+            <div class="container-l">
+                <h2>ASTRONOMICAL TRANSIT</h2>
+                <p>La mayoría de los exoplanetas conocidos se han descubierto mediante el método de tránsito. Un tránsito ocurre cuando un planeta pasa entre una estrella y su observador. Dentro de nuestro sistema solar, podemos observar tránsitos cuando Venus o Mercurio transitan entre la Tierra y el Sol.
+
+Los tránsitos revelan la presencia de un exoplaneta no porque lo veamos directamente a muchos años luz de distancia, sino porque el planeta, al pasar frente a su estrella, bloquea ligeramente su luz. Este oscurecimiento se puede observar en las curvas de luz: gráficos que muestran la luz recibida durante un período de tiempo determinado. Cuando el exoplaneta transita frente a la estrella, la curva de luz muestra una disminución en el brillo.
+
+Esta información explica por qué los tránsitos son tan valiosos para la ciencia: permiten determinar diversas características de los exoplanetas. El tamaño de la órbita del exoplaneta se puede calcular a partir de su período orbital (el tiempo que tarda en completar una órbita), y el tamaño del planeta mismo se deduce por cuánto se reduce el brillo de la estrella.
+
+Además, durante un tránsito podemos estudiar la atmósfera del exoplaneta. Cuando el planeta transita, parte de la luz estelar atraviesa su atmósfera, y esta luz puede analizarse para identificar los diferentes elementos atmosféricos que influyen en su dispersión. La composición atmosférica es crucial para determinar la habitabilidad.
+
+La habitabilidad también puede inferirse a través del tamaño orbital y la temperatura de la estrella. Estos factores ayudan a determinar la temperatura del planeta, revelando si su superficie tiene una temperatura adecuada o es inhóspita para la vida.</p>
+                <h2>TESS - KEPLER -K2</h2>
+                <p>Aquí va la simulación de Gres:D</p>
+            </div>
+        </section>
+
+        <section class="content-section-l-t">
+            <div class="container-l">
+                <h2>OUR TOOL</h2>
+                <p class="botones"><a href="/classify">CLASSIFY</a></p>
+                <p>Si tienes una curva de luz que quieres que el modelo analice podrás llenar el formulario de información dando click en el botón de arriba.</p>
+            </div>
+        </section>
+    </div>
+
+    
+    <!--  *************************************************** -->
+    <!-- Menú lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span>Menú</span>
+            <button class="close-btn" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/"> LOG IN OR SIGN UP </a></li>
+            <li><a href="/"> WHO ARE WE </a></li>
+            <li><a href="/classify"> CLASSIFY </a></li>
+            <li><a href="/database"> DATABASE </a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay PARA CERRAR MENÚ (DEBE ESTAR FUERA del sidebar) -->
+    <div class="overlay" id="overlay"></div>
+    <!--  *************************************************** -->
+
+
+    <script src="{{ url_for('static', path='/js/home.js') }}"></script>
+</body>
+</html>
