@@ -11,7 +11,7 @@ from sklearn.metrics import classification_report, roc_auc_score
 import joblib
 import os
 
-print("🚀 Entrenando modelo compatible con tu sistema...")
+print("Entrenando modelo compatible con tu sistema...")
 
 # Crear datos de ejemplo realistas basados en Kepler
 np.random.seed(42)
@@ -87,7 +87,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-print("🔄 Entrenando modelo...")
+print("Entrenando modelo...")
 model.fit(X_train, y_train)
 
 # Evaluar
